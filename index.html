@@ -1,34 +1,142 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="./vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <title>I'm Sorry...</title>
-    
-    <link rel="stylesheet" href="./style.css">
-    
-    <meta property="og:image" content="https://bolt.new/static/og_default.png">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content="https://bolt.new/static/og_default.png">
-  </head>
-  <body>
-    <div id="app">
-      <div class="container">
-        <img src="https://media.giphy.com/media/L95W4wv8nnb9K/giphy.gif" alt="Sorry" class="gif">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorry Arya ❤️</title>
+    <style>
+        /* CSS STYLES (Making it look pretty) */
+        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #ffe5e5; /* Soft Pink Background */
+            font-family: 'Quicksand', sans-serif;
+            text-align: center;
+            overflow: hidden; /* Prevents scrollbars when button moves */
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            max-width: 90%;
+            width: 400px;
+        }
+
+        img.gif {
+            width: 100%;
+            max-width: 250px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: #d32f2f;
+            font-size: 1.4rem;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        p.subtext {
+            color: #555;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            position: relative;
+            min-height: 60px; /* Space for buttons */
+        }
+
+        button {
+            padding: 12px 30px;
+            font-size: 1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            font-family: 'Quicksand', sans-serif;
+        }
+
+        .yes-button {
+            background-color: #4caf50; /* Green */
+            color: white;
+            box-shadow: 0 4px 6px rgba(76, 175, 80, 0.3);
+        }
+
+        .no-button {
+            background-color: #f44336; /* Red */
+            color: white;
+            box-shadow: 0 4px 6px rgba(244, 67, 54, 0.3);
+            position: absolute; /* Allows it to move freely */
+            right: 20px; /* Initial position */
+        }
+
+        /* Success Message Styling */
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="mainCard">
+        <img src="https://media.giphy.com/media/L95W4wv8nnb9K/giphy.gif" alt="Sad Cute Gif" class="gif">
         
-        <h1>Kharch sorry , kharch sorry golya nahi ghetlya tya sathi pn ani parat tula ulta bolo tya sathi sudha kharch sorry , jya mule tu bolat nahi ahes kharch sorry tya sathi !!</h1>
-        <p class="subtext">Karna maff please ani bol na ?</p>
+        <h1>Kharch sorry, kharch sorry golya nahi ghetlya tya sathi pn ani parat tula ulta bolo tya sathi sudha kharch sorry...</h1>
+        <p class="subtext">Karna maff please ani bol na?</p>
         
         <div class="buttons">
-          <button id="yes-btn" class="yes-button">Yes</button>
-          <button id="no-btn" class="no-button">No</button>
+            <button class="yes-button" onclick="sayYes()">Yes</button>
+            <button class="no-button" id="noBtn" onmouseover="moveButton()" onclick="moveButton()">No</button>
         </div>
-      </div>
     </div>
-    <script type="module" src="./main.js"></script>
-  </body>
+
+    <div class="container hidden" id="successCard">
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3R6b3h6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6/MDJ/giphy.gif" alt="Happy Gif" class="gif">
+        <h1 style="color: #4caf50;">Thank You Arya! ❤️</h1>
+        <p class="subtext">I promise to take my meds on time!</p>
+    </div>
+
+    <script>
+        /* JAVASCRIPT LOGIC (The Brains) */
+        
+        function moveButton() {
+            const btn = document.getElementById('noBtn');
+            const container = document.querySelector('.container');
+            
+            // Get the size of the container so button stays inside or near it
+            const maxX = window.innerWidth - btn.offsetWidth - 20;
+            const maxY = window.innerHeight - btn.offsetHeight - 20;
+
+            const randomX = Math.random() * maxX;
+            const randomY = Math.random() * maxY;
+
+            btn.style.position = 'fixed'; // Makes it move relative to the whole screen
+            btn.style.left = randomX + 'px';
+            btn.style.top = randomY + 'px';
+        }
+
+        function sayYes() {
+            // Hide the Sorry Card
+            document.getElementById('mainCard').classList.add('hidden');
+            // Show the Happy Card
+            document.getElementById('successCard').classList.remove('hidden');
+            // Remove the floating No button
+            document.getElementById('noBtn').style.display = 'none';
+        }
+    </script>
+
+</body>
 </html>
